@@ -1,0 +1,380 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<style>
+    body {
+        background: #181818;
+        color: #fff;
+    }
+    .metro-hero-bg {
+        position: relative;
+        width: 100vw;
+        min-height: 600px;
+        background: #181818;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-top: -60px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+    }
+    .metro-hero-bg img {
+        width: 100vw;
+        max-width: 100%;
+        min-height: 420px;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+        filter: grayscale(1) brightness(0.5) contrast(1.2);
+        z-index: 1;
+    }
+    .metro-hero-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(120deg, rgba(255,0,36,0.55) 0%, rgba(24,24,24,0.95) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+    .metro-hero-title {
+        position: absolute;
+        left: 50%;
+        top: 38%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 4vw;
+        white-space: nowrap;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-weight: 700;
+        text-align: center;
+        z-index: 3;
+        letter-spacing: 2px;
+        text-shadow: 0 4px 24px #ff0036, 0 2px 8px rgba(0,0,0,0.7);
+        animation: metroTitlePop 1.2s cubic-bezier(.68,-0.55,.27,1.55), metroTitleGlow 2.5s infinite alternate;
+    }
+    .metro-hero-greeting {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, 0);
+        color: #ff0036;
+        font-size: 1.6vw;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-weight: 400;
+        z-index: 3;
+        text-align: center;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 8px #181818;
+    }
+    @keyframes metroTitlePop {
+        0% { opacity: 0; transform: translate(-50%, -60%) scale(0.8);}
+        60% { opacity: 1; transform: translate(-50%, -52%) scale(1.05);}
+        100% { opacity: 1; transform: translate(-50%, -50%) scale(1);}
+    }
+    @keyframes metroTitleGlow {
+        0% { text-shadow: 0 4px 24px #ff0036, 0 2px 8px rgba(0,0,0,0.7);}
+        100% { text-shadow: 0 8px 32px #ff0036, 0 2px 16px #ff0036;}
+    }
+    .register-btn {
+        position: absolute;
+        left: 50%;
+        top: 44%;
+        transform: translate(-50%, 0);
+        z-index: 4;
+        padding: 16px 44px;
+        font-size: 1.3rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #ff0036 0%, #181818 100%);
+        color: #fff;
+        border: none;
+        border-radius: 32px;
+        box-shadow: 0 4px 24px rgba(255,0,54,0.18);
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+        text-decoration: none;
+        letter-spacing: 2px;
+        outline: none;
+        animation: pulseRed 1.8s infinite;
+    }
+    @keyframes pulseRed {
+        0% { box-shadow: 0 0 0 0 rgba(255,0,54,0.4);}
+        70% { box-shadow: 0 0 0 16px rgba(255,0,54,0);}
+        100% { box-shadow: 0 0 0 0 rgba(255,0,54,0);}
+    }
+    .register-btn:hover, .register-btn:focus {
+        background: linear-gradient(90deg,#181818 0%,#ff0036 100%);
+        box-shadow: 0 8px 32px rgba(255,0,54,0.28);
+        transform: translate(-50%, -4px) scale(1.06);
+        color: #fff;
+        text-decoration: none;
+    }
+
+    /* Matte Black Flex Section */
+    .mat-black-flex-section {
+        display: flex;
+        background: #181818;
+        color: #fff;
+        padding: 64px 0 64px 0;
+        justify-content: center;
+        align-items: center;
+        gap: 48px;
+        width: 100%;
+    }
+    .mat-black-left {
+        flex: 1 1 0;
+        max-width: 540px;
+        padding: 0 32px;
+        text-align: left;
+    }
+    .mat-black-left h2 {
+        font-size: 2.2rem;
+        margin-bottom: 18px;
+        color: #ff0036;
+        font-weight: 700;
+    }
+    .mat-black-left p {
+        font-size: 1.15rem;
+        margin-bottom: 18px;
+        color: #eee;
+    }
+    .mat-black-left ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .mat-black-left li {
+        margin-bottom: 10px;
+        font-size: 1.05rem;
+        color: #fff;
+    }
+    .mat-black-right {
+        flex: 1 1 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 32px;
+    }
+    .mat-black-right img {
+        max-width: 350px;
+        width: 100%;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        background: #232323;
+    }
+
+    /* White Counter Section */
+    .white-counter-section {
+        background: #f8f9fa;
+        color: #232323;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        min-height: 320px; 
+    }
+    .stats-container {
+        display: flex;
+        min-height: 320px; /* Increased height */
+        width: 100%;
+        max-width: 1678px;
+        margin: 0 auto;
+        background: none;
+    }
+    .stats-left {
+        background: #b3d9ff;
+        color: #1a237e;
+        flex: 0 0 22%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-weight: 400;
+        font-size: 2.5rem;
+        min-height: 140px;
+    }
+    .stats-left .stats-number {
+        font-size: 3.2rem;
+        color: #2196f3;
+        font-weight: 500;
+        margin-bottom: 0.2em;
+        display: block;
+    }
+    .stats-left .stats-label {
+        font-size: 1.1rem;
+        color: #232323;
+        font-weight: 400;
+        text-align: left;
+        line-height: 1.2;
+    }
+    .stats-right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        background: #f8f9fa;
+        min-height: 140px;
+    }
+    .stats-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 18px;
+    }
+    .stats-item .stats-number {
+        font-size: 2.2rem;
+        color: #2196f3;
+        font-weight: 500;
+        margin-bottom: 0.2em;
+    }
+    .stats-item .stats-label {
+        font-size: 1rem;
+        color: #232323;
+        font-weight: 400;
+        text-align: center;
+        letter-spacing: 0.5px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 900px) {
+        .metro-hero-title { font-size: 6vw; }
+        .metro-hero-bg { min-height: 320px; }
+        .metro-hero-bg img { min-height: 220px; }
+        .metro-hero-greeting { font-size: 2.8vw; }
+        .register-btn { font-size: 1.1rem; padding: 12px 28px; top: 70%; }
+        .mat-black-flex-section {
+            flex-direction: column;
+            padding: 32px 0;
+            gap: 24px;
+        }
+        .mat-black-left, .mat-black-right {
+            max-width: 100%;
+            padding: 0 12px;
+        }
+        .stats-container {
+            flex-direction: column;
+            min-height: unset;
+        }
+        .stats-left, .stats-right {
+            min-height: 80px;
+            width: 100%;
+        }
+        .stats-left {
+            flex-direction: row;
+            justify-content: center;
+            font-size: 1.5rem;
+            padding: 18px 0;
+        }
+        .stats-left .stats-number {
+            font-size: 2rem;
+        }
+        .stats-right {
+            flex-direction: row;
+            justify-content: space-around;
+            padding: 18px 0;
+        }
+        .stats-item .stats-number {
+            font-size: 1.3rem;
+        }
+    }
+    @media (max-width: 600px) {
+        .metro-hero-title { font-size: 8vw; }
+        .metro-hero-bg { min-height: 180px; }
+        .metro-hero-bg img { min-height: 110px; }
+        .metro-hero-greeting { font-size: 4vw; }
+        .register-btn { font-size: 1rem; padding: 10px 18px; top: 75%; }
+        .mat-black-flex-section {
+            flex-direction: column;
+            padding: 18px 0;
+            gap: 12px;
+        }
+        .mat-black-left, .mat-black-right {
+            padding: 0 4px;
+        }
+        .mat-black-right img {
+            max-width: 95vw;
+        }
+        .stats-container {
+            flex-direction: column;
+        }
+        .stats-left, .stats-right {
+            min-height: 60px;
+            padding: 12px 0;
+        }
+        .stats-item {
+            margin: 0 6px;
+        }
+        .stats-item .stats-number {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="metro-hero-bg">
+    <img src="{% static 'IMG/mustang art wallpaper American muscle car Ford Mustang.jpg' %}" alt="Metro Subway">
+    <div class="metro-hero-overlay"></div>
+    <div class="metro-hero-title">
+        {{ headline|default:"Welcome To RoadTripRentals" }}
+    </div>
+    <div class="metro-hero-greeting">
+        {% if user.is_authenticated %}
+            Hello, {{ user.username }}!
+        {% else %}
+            Experience the future of urban travel.
+        {% endif %}
+    </div>
+    {% if user.is_authenticated %}
+                
+            {% else %}
+                <a href="{% url 'signup' %}" class="register-btn">Register now</a>
+            {% endif %}
+    
+</div>
+
+<!-- Matte Black Section with Left Writing and Right Image -->
+<div class="mat-black-flex-section">
+    <div class="mat-black-left">
+        <h2>Why Choose RoadTripRentals?</h2>
+        <p>
+            Enjoy the ultimate car rental experience with our premium fleet, unbeatable prices, and 24/7 customer support. 
+            Whether it's a business trip or a weekend getaway, we have the perfect ride for you.
+        </p>
+        <ul>
+            <li>✔ Wide selection of vehicles</li>
+            <li>✔ Easy online booking</li>
+            <li>✔ Trusted by thousands</li>
+        </ul>
+    </div>
+    <div class="mat-black-right">
+        <img src="{% static 'IMG/Bold Red BMW M3_ Dominating the Urban Jungle.jpg' %}" alt="Car Rental" />
+    </div>
+</div>
+
+<!-- White Counter Section -->
+<div class="white-counter-section">
+    <div class="stats-container">
+        <div class="stats-left">
+            <span class="stats-number">60</span>
+            <span class="stats-label">
+                Year<br>
+                Experienced
+            </span>
+        </div>
+        <div class="stats-right">
+            <div class="stats-item">
+                <span class="stats-number">1,090</span>
+                <span class="stats-label">Total Cars</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-number">2,590</span>
+                <span class="stats-label">Happy Customers</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-number">67</span>
+                <span class="stats-label">Total Branches</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

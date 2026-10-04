@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | RoadTripRentals</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      line-height: 1.6;
+      background: #181818;
+      color: #f5f5f5;
+    }
+
+    header {
+      background-color: #232323;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #b71c1c;
+      box-shadow: 0 2px 12px rgba(183,28,28,0.08);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 80px;
+      filter: grayscale(0.2) brightness(0.95);
+    }
+
+    .logo span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #d32f2f;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #f5f5f5;
+      font-weight: 500;
+      margin-left: 20px;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #b71c1c;
+    }
+
+    .about-banner {
+      background: linear-gradient(120deg, #232323 60%, #b71c1c 100%);
+      padding: 80px 20px 60px 20px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(183,28,28,0.10);
+    }
+
+    .about-banner h1 {
+      font-size: 3rem;
+      color: #fff;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px #b71c1c44;
+    }
+
+    .about-banner p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #ffbdbd;
+    }
+
+    .content-section {
+      padding: 50px 20px;
+      background-color: #222;
+      border-bottom: 1px solid #232323;
+    }
+
+    .content-section:nth-child(even) {
+      background-color: #232323;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .content-section h2 {
+      font-size: 2rem;
+      color: #d32f2f;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    .content-section p {
+      font-size: 1.1rem;
+      color: #f5f5f5;
+    }
+
+    .team-section {
+      background-color: #181818;
+      padding: 50px 20px;
+      border-top: 2px solid #b71c1c;
+      border-bottom: 2px solid #b71c1c;
+    }
+
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .member-card {
+      background: #232323;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(183,28,28,0.10);
+      max-width: 290px;
+      text-align: center;
+      border: 1.5px solid #b71c1c;
+      transition: box-shadow 0.2s, border 0.2s;
+    }
+    .member-card:hover {
+      box-shadow: 0 4px 24px #b71c1c44;
+      border: 1.5px solid #d32f2f;
+    }
+
+    .member-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 2px solid #d32f2f;
+      background: #181818;
+    }
+
+    .member-card h3 {
+      color: #ff5252;
+      margin-bottom: 4px;
+      font-size: 1.2rem;
+    }
+    .member-card p {
+      color: #f5f5f5;
+      font-size: 1rem;
+    }
+
+    .contact-section {
+      background-color: #232323;
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 2px solid #b71c1c;
+    }
+
+    .contact-section h2 {
+      color: #d32f2f;
+    }
+    .contact-section p {
+      color: #f5f5f5;
+    }
+
+    .btn-home {
+      display: inline-block;
+      background-color: #b71c1c;
+      color: #fff;
+      padding: 15px 30px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 18px;
+      box-shadow: 0 2px 8px #b71c1c33;
+      border: none;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-home:hover {
+      background-color: #d32f2f;
+      box-shadow: 0 4px 16px #b71c1c55;
+    }
+
+    footer {
+      background-color: #181818;
+      padding: 20px;
+      text-align: center;
+      color: #ffbdbd;
+      border-top: 2px solid #b71c1c;
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 900px) {
+      .team-members {
+        flex-direction: column;
+        align-items: center;
+      }
+      .container {
+        padding: 0 10px;
+      }
+    }
+    @media (max-width: 600px) {
+      .about-banner {
+        padding: 40px 10px 30px 10px;
+      }
+      .content-section, .team-section, .contact-section {
+        padding: 24px 6vw;
+      }
+      .member-card {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="{% static 'IMG/logo.png' %}" alt="RoadTripRentals Logo" />
+      <span>RoadTripRentals</span>
+    </div>
+  </header>
+
+  <section class="about-banner">
+    <div class="banner-content">
+      <h1>About Us</h1>
+      <p></p>
+    </div>
+  </section>
+
+  <section class="content-section mission-section">
+    <div class="container">
+      <h2>Our Mission</h2>
+      <p>
+        At RoadTripRentals, our mission is to provide convenient, affordable, and reliable car rental solutions tailored to meet the diverse needs of our customers. We strive to deliver exceptional service, a seamless booking experience, and a well-maintained fleet of vehicles to ensure safety, comfort, and satisfaction on every journey.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section vision-section">
+    <div class="container">
+      <h2>Our Vision</h2>
+      <p>
+        Our vision is to become the leading car rental platform globally, recognized for innovation, sustainability, and customer-centric excellence. By leveraging cutting-edge technology and eco-friendly mobility options, we aim to redefine travel experiences while fostering trust, accessibility, and environmental responsibility in the transportation industry.
+      </p>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="container">
+      <h2>Meet Our Team</h2>
+      <div class="team-members">
+        <div class="member-card">
+          <img src="{% static 'IMG/add image here.jpg' %}" alt="" />
+          <h3>Tanzim Tisha</h3>
+          <p>Lead Programmer</p>
+          <p>Expert in Python, Django.</p>
+        </div>
+        <div class="member-card">
+          <img src="{% static 'IMG/add image here.jpg' %}" alt="" />
+          <h3>Mishrat Moli</h3>
+          <p>Analyst and Designer</p>
+          <p>Expert in design and data analyst.</p>
+        </div>
+        <div class="member-card">
+          <img src="{% static 'IMG/addimage here' %}" alt="" />
+          <h3>Sumayea Akter Samia</h3>
+          <p>Analyst and Designer</p>
+          <p>Expert in design and analyst.</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>We're here for you anytime. Reach out with questions, ideas, or if you just need support.</p>
+      <p>Email: support@RoadTripRentals.com</p>
+      <p>Phone: +880-000000000</p>
+
+      <!-- Back to Home Button -->
+      <a href="{% url 'home' %}" class="btn-home">Back to Home</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 RoadTripRentals. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

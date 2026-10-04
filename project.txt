@@ -1,0 +1,9 @@
+Admin: Tanzim
+mail:t@gmail.com
+pass:12345
+ Seller:Moli
+pass:12345
+mail:m@gmail.com
+ passenger: Samia
+mail:s@gmail.com
+pass:12345

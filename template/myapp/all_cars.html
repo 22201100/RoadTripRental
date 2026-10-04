@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<style>
+    body {
+        background: #181818;
+        color: #fff;
+    }
+    .cars-hero-bg {
+        position: relative;
+        width: 100vw;
+        min-height: 420px;
+        background: #181818;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-top: -60px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+    }
+    .cars-hero-bg img {
+        width: 100vw;
+        max-width: 100%;
+        min-height: 420px;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+        filter: grayscale(1) brightness(0.5) contrast(1.2);
+        z-index: 1;
+        position: absolute;
+        top: 0; left: 0;
+    }
+    .cars-hero-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(120deg, rgba(24,24,24,0.92) 60%, rgba(24,24,24,0.98) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+    .cars-hero-title {
+        position: relative;
+        color: #fff;
+        font-size: 3vw;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-weight: 700;
+        text-align: center;
+        z-index: 3;
+        letter-spacing: 2px;
+        text-shadow: 0 4px 24px #000, 0 2px 8px rgba(0,0,0,0.7);
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .cars-hero-desc {
+        position: relative;
+        color: #ff0036;
+        font-size: 1.2vw;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-weight: 400;
+        z-index: 3;
+        text-align: center;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 8px #181818;
+        margin-top: 18px;
+    }
+    /* Blog Container Styles */
+    .blog-container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 0 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: calc(100vh - 166px);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    /* Card Grid Layout */
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+    }
+    /* Individual Blog Card */
+    .blog-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    /* Card Image */
+    .card-image-container {
+        height: 200px;
+        overflow: hidden;
+    }
+    .card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    .blog-card:hover .card-image {
+        transform: scale(1.05);
+    }
+    /* Card Content */
+    .card-body {
+        padding: 20px;
+    }
+    .blog-title {
+        font-size: 1.3rem;
+        margin: 0 0 10px 0;
+        color: #2c3e50;
+    }
+    .blog-category {
+        display: inline-block;
+        background: #f1f1f1;
+        color: #7f8c8d;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+    /* Read More Button */
+    .read-more-btn {
+        display: inline-block;
+        background: #ff0036;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.3s ease;
+    }
+    .read-more-btn:hover {
+        background: #b30024;
+    }
+    /* Responsive Design */
+    @media (max-width: 900px) {
+        .cars-hero-title { font-size: 5vw; }
+        .cars-hero-bg { min-height: 260px; }
+        .cars-hero-bg img { min-height: 260px; }
+        .cars-hero-desc { font-size: 2vw; }
+        .card-container { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+    }
+    @media (max-width: 600px) {
+        .cars-hero-title { font-size: 7vw; }
+        .cars-hero-bg { min-height: 160px; }
+        .cars-hero-bg img { min-height: 160px; }
+        .cars-hero-desc { font-size: 3vw; }
+        .card-container { grid-template-columns: 1fr; }
+    }
+    .add-car-btn {
+        position: fixed;
+        bottom: 120px;
+        left: 30px;
+        z-index: 1000;
+        background:rgba(76, 70, 199, 0.69);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 32px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        box-shadow: 0 4px 16px rgba(233,30,99,0.15);
+        transition: background 0.2s;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .add-car-btn:hover {
+        background:rgb(0, 0, 0);
+        color: #fff;
+        text-decoration: none;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="cars-hero-bg">
+    <img src="{% static 'IMG/mustang art wallpaper American muscle car Ford Mustang.jpg' %}" alt="Car Background">
+    <div class="cars-hero-overlay"></div>
+    <div style="position: relative; z-index: 3; width: 100%;">
+        <h1 class="cars-hero-title">Explore Our Cars</h1>
+        <div class="cars-hero-desc">Find the perfect ride for your next journey</div>
+    </div>
+</div>
+
+<div class="blog-container">
+    <!-- Car Search Form -->
+    <form method="get" action="" style="margin-bottom: 30px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+        <input type="text" name="q" placeholder="Search cars by name or description..." value="{{ request.GET.q|default:'' }}" style="padding: 10px 16px; border-radius: 6px; border: 1px solid #ccc; min-width: 240px; font-size: 1rem;">
+        <button type="submit" style="padding: 10px 24px; border-radius: 6px; background: #ff0036; color: #fff; border: none; font-weight: 500; cursor: pointer;">Search</button>
+    </form>
+    <div class="card-container">
+        {% for car in cars %}
+        <div class="blog-card">
+            {% if car.image %}
+            <div class="card-image-container">
+                <img src="{{ car.image.url }}" alt="{{ car.car_name }}" class="card-image">
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <h3 class="blog-title">{{ car.car_name }}</h3>
+                <span class="blog-category">{{ car.description|truncatewords:10 }}</span>
+                <p>Price: Taka{{ car.price }}</p>
+                <a href="{% url 'car_details' car.id %}" class="read-more-btn">View Details</a>
+            </div>
+        </div>
+        {% empty %}
+        <div>No cars found.</div>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated and user.user_type != "passenger" %}
+    <a href="{% url 'upload_car' %}" class="add-car-btn" title="Add car">Upload car</a>
+    {% endif %}
+</div>
+{% endblock content %}

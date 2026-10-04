@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<style>
+    body {
+        background: #181818;
+        color: #fff;
+    }
+    .signup-hero-bg {
+        position: relative;
+        width: 100vw;
+        min-height: 100vh;
+        background: #181818;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-top: -60px;
+    }
+    .signup-hero-bg img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+        filter: grayscale(1) brightness(0.6) contrast(1.2);
+        z-index: 1;
+        position: absolute;
+        top: 0; left: 0;
+    }
+    .signup-hero-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(120deg, rgba(24,24,24,0.92) 60%, rgba(24,24,24,0.98) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+    .signup-form-container {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        background: rgba(24,24,24,0.92);
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+        padding: 40px 32px 32px 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        backdrop-filter: blur(2px);
+    }
+    .signup-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 18px;
+        text-align: center;
+        letter-spacing: 1px;
+        text-shadow: 0 4px 24px #000, 0 2px 8px rgba(0,0,0,0.7);
+    }
+    .signup-form label {
+        display: block;
+        color: #bbb;
+        font-size: 1rem;
+        margin-bottom: 6px;
+        margin-top: 16px;
+        font-weight: 500;
+    }
+    .signup-form input,
+    .signup-form select {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 8px;
+        border: none;
+        background: #232323;
+        color: #fff;
+        font-size: 1rem;
+        margin-bottom: 8px;
+        outline: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+        transition: background 0.2s, box-shadow 0.2s;
+    }
+    .signup-form input:focus,
+    .signup-form select:focus {
+        background: #181818;
+        box-shadow: 0 4px 16px #ff0036, 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .signup-btn {
+        width: 100%;
+        margin-top: 18px;
+        padding: 14px 0;
+        background: linear-gradient(90deg, #232323 0%, #ff0036 100%);
+        color: #fff;
+        font-size: 1.15rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(255,0,54,0.13);
+        letter-spacing: 1px;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .signup-btn:hover, .signup-btn:focus {
+        background: linear-gradient(90deg, #ff0036 0%, #232323 100%);
+        box-shadow: 0 8px 24px rgba(255,0,54,0.18);
+        transform: scale(1.03);
+    }
+    .signup-link {
+        color: #ff0036;
+        text-decoration: underline;
+        margin-top: 18px;
+        display: block;
+        text-align: center;
+        font-size: 1rem;
+    }
+    @media (max-width: 600px) {
+        .signup-form-container {
+            padding: 24px 8px 18px 8px;
+            max-width: 98vw;
+        }
+        .signup-title {
+            font-size: 1.4rem;
+        }
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="signup-hero-bg">
+    <img src="{% static 'IMG/Bold Red BMW M3_ Dominating the Urban Jungle.jpg' %}" alt="Car Background">
+    <div class="signup-hero-overlay"></div>
+    <div class="signup-form-container">
+        <div class="signup-title">Create Your Account</div>
+        <form method="post" enctype="multipart/form-data" class="signup-form">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="user_type">User Type</label>
+            <select id="user_type" name="user_type" required>
+                <option value="passenger">Passenger</option>
+                <option value="seller">Car Owner</option>
+            </select>
+
+            <label for="profile_pic">Profile Picture</label>
+            <input type="file" id="profile_pic" name="profile_pic" accept="image/*">
+
+            <button type="submit" class="signup-btn">Create Account</button>
+        </form>
+        <a href="{% url 'login' %}" class="signup-link">Already have an account? Log in</a>
+    </div>
+</div>
+{% endblock content %}

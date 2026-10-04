@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<style>
+    .car-details-container {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(233,30,99,0.08);
+        padding: 32px 28px;
+        max-width: 400px;
+        width: 100%;
+        margin: 40px auto;
+    }
+    .car-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color:rgb(15, 7, 10);
+        margin-bottom: 12px;
+    }
+    .car-desc {
+        color: #555;
+        font-size: 1.1rem;
+        margin-bottom: 18px;
+    }
+    .car-price {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 24px;
+    }
+    .car-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+    }
+    .car-actions a {
+        min-width: 90px;
+    }
+    .search-bar {
+        margin-bottom: 24px;
+    }
+    /* Ensure main takes enough space for sticky footer */
+    main {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* --- Button Styles --- */
+    .btn {
+        display: inline-block;
+        font-weight: 500;
+        font-size: 1rem;
+        padding: 10px 26px;
+        border-radius: 8px;
+        border: none;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(233,30,99,0.08);
+        outline: none;
+        background: #e53935;
+        color: #fff;
+    }
+    .btn:hover, .btn:focus {
+        background: #b71c1c;
+        color: #fff;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="car-details-container">
+    <form method="get" action="{% url 'all_cars' %}" class="search-bar">
+    </form>
+    <div>
+        {% if car.image %}
+            <div style="text-align:center;margin-bottom:18px;">
+                <img src="{{ car.image.url }}" alt="{{ car.car_name }}" style="max-width:100%;max-height:220px;border-radius:12px;box-shadow:0 2px 12px rgba(233,30,99,0.08);">
+            </div>
+        {% endif %}
+        <div class="car-title">{{ car.car_name }}</div>
+        <div class="car-desc">{{ car.description }}</div>
+        <div class="car-price">Rent Price: {{ car.price }} Taka</div>
+        <div class="car-actions">
+            {% if user.is_authenticated and user.user_type != "passenger" %}
+                 <a href="{% url 'delete' car.id %}" class="btn btn-danger">Delete</a>
+                 <a href="{% url 'all_cars' %}" class="btn btn-primary">Back</a>
+                 <a href="{% url 'update_car' car.id %}" class="btn btn-warning">Update</a>
+                
+            {% else %}
+                 <a href="{% url 'all_cars' %}" class="btn btn-primary">Back</a>
+                 <a href="{% url 'purchase_car' car.id %}" class="btn btn-success">Rent</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

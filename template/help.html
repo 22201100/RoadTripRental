@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<style>
+    body {
+        background: #181818;
+        color: #fff;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .help-hero-bg {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #181818;
+        overflow: hidden;
+    }
+    .help-hero-bg img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        display: block;
+        filter: grayscale(1) brightness(0.6) contrast(1.2);
+        z-index: 1;
+        position: absolute;
+        top: 0; left: 0;
+    }
+    .help-hero-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(120deg, rgba(24,24,24,0.92) 60%, rgba(24,24,24,0.98) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+    .help-car-card {
+        position: relative;
+        z-index: 3;
+        max-width: 500px;
+        margin: 60px auto 0 auto;
+        background: rgba(24,24,24,0.92);
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+        padding: 32px 28px 24px 28px;
+        color: #fff;
+        text-align: center;
+        backdrop-filter: blur(2px);
+    }
+    .help-car-card h1 {
+        font-size: 2.1rem;
+        font-weight: bold;
+        margin-bottom: 12px;
+        color: #fff;
+        text-shadow: 0 4px 24px #000, 0 2px 8px rgba(0,0,0,0.7);
+    }
+    .help-car-card .subtitle {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 22px;
+        color: #e3e3e3;
+    }
+    .help-car-card ul {
+        text-align: left;
+        margin: 0 auto 12px auto;
+        padding-left: 22px;
+        max-width: 500px;
+        color: #e3e3e3;
+        font-size: 1.08rem;
+    }
+    .help-car-card ul li {
+        margin-bottom: 23px;
+        line-height: 1.6;
+        border-radius: 8px;
+        transition: background 0.2s, color 0.2s;
+        padding: 6px 10px;
+    }
+    .help-car-card ul li:hover {
+        background: #ff0036;
+        color: #fff;
+        cursor: pointer;
+    }
+    .help-car-card .purchase-step {
+        display: block;
+        background: #232323;
+        color: #bfc9d6;
+        border-radius: 8px;
+        padding: 12px 18px;
+        margin: 10px 0 10px 0;
+        font-size: 1.05rem;
+        text-align: left;
+        border: none;
+        outline: none;
+        width: 100%;
+        box-sizing: border-box;
+        pointer-events: none;
+    }
+    .help-car-card .final-note {
+        margin-top: 18px;
+        color: #e3e3e3;
+        font-size: 1.08rem;
+    }
+    .help-car-card .go-back-btn {
+        margin-top: 26px;
+        background: #ff0036;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 32px;
+        font-size: 1.08rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px rgba(44,56,74,0.08);
+    }
+    .help-car-card .go-back-btn:hover {
+        background: #b30024;
+    }
+    @media (max-width: 700px) {
+        .help-car-card {
+            padding: 18px 6vw 18px 6vw;
+        }
+        .help-car-card h1 {
+            font-size: 1.3rem;
+        }
+    }
+    /* Hide footer only on help.html */
+    footer {
+        display: none !important;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="help-hero-bg">
+    <img src="{% static 'IMG/DODGE.jpg' %}" alt="Car Background">
+    <div class="help-hero-overlay"></div>
+</div>
+<div class="help-car-card">
+    <h1>How to Purchase a Car?</h1>
+    <div class="subtitle"><b>Follow these simple steps to purchase your metro car:</b></div>
+    <ul>
+        <li>Visit the <b>“Purchase car”</b> section from the homepage &gt; Services &gt; Purchase car.</li>
+        <li>Select your departure station <b>“From”</b> and destination station <b>“To”</b>.</li>
+        <li>Select the date and time of your travel.</li>
+        <li>Choose the number of cars you wish to purchase.</li>
+    </ul>
+    <div class="purchase-step">
+        &#9679; Click on the <b>“Purchase”</b> button to proceed to payment.
+    </div>
+    <div class="final-note">
+        Once you’ve made your payment, your car will be confirmed and your journey is set!
+    </div>
+    <button class="go-back-btn" onclick="window.history.back();">Go Back</button>
+</div>
+{% endblock content %}

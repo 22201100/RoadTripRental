@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(24, 26, 32, 0.9) 0%, rgba(34, 48, 74, 0.9) 100%), url('{% static "IMG/BMW M5 Competition.jpg" %}') center/cover no-repeat;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 40px;
+            background: #23272f;
+            box-shadow: 0 2px 12px rgba(30, 136, 229, 0.08);
+            border-bottom: 1px solid #22304a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            color: #2196f3;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .navbar .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .navbar .nav-btns {
+            display: flex;
+            gap: 16px;
+        }
+        .nav-btn {
+            background: #23272f;
+            color: #2196f3;
+            border: 2px solid #2196f3;
+            border-radius: 20px;
+            padding: 8px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(33,150,243,0.04);
+        }
+        .nav-btn:hover, .nav-btn:focus {
+            background: #2196f3;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(33,150,243,0.13);
+        }
+        .profile-card {
+            max-width: 580px;
+            margin: 60px auto 0 auto;
+            background: #23272f;
+            border-radius: 18px;
+            box-shadow: 0 8px 40px rgba(33,150,243,0.10);
+            padding: 40px 36px 32px 36px;
+            text-align: center;
+            animation: fadeIn 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        .table-profile-card {
+            max-width: 1080px;
+            margin: 60px auto 0 auto;
+            background: #23272f;
+            border-radius: 18px;
+            box-shadow: 0 8px 40px rgba(33,150,243,0.10);
+            padding: 40px 36px 32px 36px;
+            text-align: center;
+            animation: fadeIn 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(30px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+        .profile-card h2 {
+            color: #2196f3;
+            margin-bottom: 8px;
+            font-size: 2.1rem;
+            font-weight: bold;
+        }
+        .profile-card .subtitle {
+            color: #90caf9;
+            margin-bottom: 28px;
+            font-size: 1.1rem;
+        }
+        .profile-table {
+            width: 100%;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+        }
+        .profile-table th {
+            text-align: left;
+            padding: 10px 8px;
+            color: #42a5f5;
+            font-weight: 600;
+            width: 40%;
+            background: transparent;
+        }
+        .profile-table td {
+            padding: 10px 8px;
+            color: #e3f2fd;
+            background: #22304a;
+            border-radius: 6px;
+            box-shadow: 0 1px 4px rgba(33,150,243,0.04);
+        }
+        .logout-btn {
+            background: linear-gradient(90deg, #1565c0 0%, #2196f3 100%);
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 12px 36px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(33,150,243,0.09);
+        }
+        .logout-btn:hover {
+            background: linear-gradient(90deg, #0d47a1 0%, #1565c0 100%);
+            box-shadow: 0 4px 16px rgba(33,150,243,0.13);
+        }
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 14px 10vw;
+            }
+            .profile-card {
+                padding: 24px 6vw 18px 6vw;
+            }
+        }
+        .site-footer {
+            background: #23272f;
+            text-align: center;
+            padding: 38px 0;
+            color: #fff;
+            font-size: 1rem;
+            border-top: 1px solid #22304a;
+            margin-top: 60px;
+        }
+        .site-footer .footer-content {
+            margin-top: 10px;
+            color: #90caf9;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'IMG/logo.png' %}" alt="Logo">
+            <span style="margin-left:6px;">RoadTripRentals</span>
+        </div>
+        <div class="nav-btns">
+            <a href="{% url 'home' %}" class="nav-btn">Home</a>
+            <a href="{% url 'help' %}" class="nav-btn">Help</a>
+            <a href="mailto:support@RoadTripRentals.com" class="nav-btn">Contact</a>
+        </div>
+    </nav>
+    <div class="profile-card">
+        <h2>User Profile</h2>
+        <div class="subtitle">Welcome to your profile page!</div>
+        {% if user.profile_pic %}
+            <img src="{{ user.profile_pic.url }}" alt="Profile Picture" style="width:190px;height:220px;border-radius:50%;margin-bottom:20px;">
+        {% else %}
+            <img src="{% static 'IMG/default_profile.png' %}" alt="Default Profile Picture" style="width:120px;height:120px;border-radius:50%;margin-bottom:20px;">
+        {% endif %}
+        <table class="profile-table">
+            <tr>
+                <th>Username:</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>User Type:</th>
+                <td>{{ user.get_user_type_display }}</td>
+            </tr>
+            <tr>
+                <th>Date Joined:</th>
+                <td>{{ user.date_joined }}</td>
+            </tr>
+            <tr>
+                <th>Last Login:</th>
+                <td>{{ user.last_login }}</td>
+            </tr>
+        </table>
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </div>
+    <!-- Purchased Cars Section -->
+    <div class="table-profile-card" style="margin-top: 30px;">
+        <h2 style="color: #2196f3;">Purchased Cars</h2>
+        {% if purchases and purchases.count > 0 %}
+            <table class="profile-table">
+                <tr>
+                    <th>Car Name</th>
+                    <th>Purchase Date</th>
+                    <th>With Driver</th>
+                    <th>Driver Fee</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Price</th>
+                </tr>
+                {% for purchase in purchases %}
+                <tr>
+                    <td>{{ purchase.car.car_name }}</td>
+                    <td>{{ purchase.purchased_at|date:'Y-m-d H:i' }}</td>
+                    <td>{% if purchase.with_driver %}Yes{% else %}No{% endif %}</td>
+                    <td>{% if purchase.with_driver %}{{ purchase.driver_fee }}{% else %}0{% endif %}</td>
+                    <td>{{ purchase.from_date }}</td>
+                    <td>{{ purchase.to_date }}</td>
+                    <td>{{ purchase.car.price }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <div style="color:#90caf9;">No cars purchased yet.</div>
+        {% endif %}
+    </div>
+    <footer class="site-footer">
+        <div class="footer-content">
+            © 2025 RoadTripRentals. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

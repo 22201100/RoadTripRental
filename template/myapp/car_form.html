@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<style>
+    body {
+        background: #181818;
+        color: #fff;
+    }
+    .carform-hero-bg {
+        position: relative;
+        width: 100vw;
+        min-height: 100vh;
+        background: #181818;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-top: -60px;
+    }
+    .carform-hero-bg img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+        filter: grayscale(1) brightness(0.6) contrast(1.2);
+        z-index: 1;
+        position: absolute;
+        top: 0; left: 0;
+    }
+    .carform-hero-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(120deg, rgba(24,24,24,0.92) 60%, rgba(24,24,24,0.98) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+    .car-form-container {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        max-width: 520px;
+        margin: 48px auto;
+        background: rgba(24,24,24,0.92);
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+        padding: 36px 32px 28px 32px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        backdrop-filter: blur(2px);
+    }
+    .car-form-container h2 {
+        color: #fff;
+        font-weight: bold;
+        margin-bottom: 24px;
+        text-align: center;
+        letter-spacing: 1px;
+        text-shadow: 0 4px 24px #000, 0 2px 8px rgba(0,0,0,0.7);
+    }
+    .car-form-container form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        width: 100%;
+    }
+    .car-form-container label {
+        font-weight: 500;
+        color: #bbb;
+        margin-bottom: 6px;
+    }
+    .car-form-container input[type="text"],
+    .car-form-container input[type="number"],
+    .car-form-container input[type="file"],
+    .car-form-container textarea {
+        border: none;
+        border-radius: 8px;
+        padding: 12px 14px;
+        font-size: 1rem;
+        background: #232323;
+        color: #fff;
+        margin-bottom: 8px;
+        outline: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+        transition: background 0.2s, box-shadow 0.2s;
+    }
+    .car-form-container input[type="text"]:focus,
+    .car-form-container input[type="number"]:focus,
+    .car-form-container textarea:focus {
+        background: #181818;
+        box-shadow: 0 4px 16px #ff0036, 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .car-form-container input[type="submit"] {
+        background: linear-gradient(90deg, #232323 0%, #ff0036 100%);
+        color: #fff;
+        border: none;
+        border-radius: 999px;
+        padding: 14px 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+        box-shadow: 0 4px 16px rgba(255,0,54,0.13);
+    }
+    .car-form-container input[type="submit"]:hover {
+        background: linear-gradient(90deg, #ff0036 0%, #232323 100%);
+        box-shadow: 0 8px 24px rgba(255,0,54,0.18);
+        transform: scale(1.03);
+    }
+    @media (max-width: 600px) {
+        .car-form-container {
+            padding: 24px 8px 18px 8px;
+            max-width: 98vw;
+        }
+        .car-form-container h2 {
+            font-size: 1.4rem;
+        }
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="carform-hero-bg">
+    <img src="{% static 'IMG/mastang black.jpg' %}" alt="Car Background">
+    <div class="carform-hero-overlay"></div>
+    <div class="car-form-container">
+        <h2>Add / Update Car</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="Submit" value="Save car">
+        </form>
+    </div>
+</div>
+{% endblock content %}

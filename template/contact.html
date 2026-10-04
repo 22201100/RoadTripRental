@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<style>
+    body {
+        background: #181818;
+        color: #232323;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .contact-hero-bg {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #181818;
+        overflow: hidden;
+        pointer-events: none;
+    }
+    .contact-hero-bg img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        display: block;
+        filter: grayscale(0.2) brightness(0.85) contrast(1.1);
+        z-index: 1;
+        position: absolute;
+        top: 0; left: 0;
+        pointer-events: none;
+    }
+    .contact-hero-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(120deg, rgba(255,183,77,0.38) 60%, rgba(255,183,77,0.55) 100%);
+        z-index: 2;
+        pointer-events: none;
+        /* Light orange overlay */
+    }
+    .contact-main-container {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 48px;
+        margin: 60px auto 0 auto;
+        max-width: 1100px;
+        width: 100%;
+        padding: 40px 20px 60px 20px;
+    }
+    .contact-info-card {
+        background: rgba(255,255,255,0.98);
+        color: #232323;
+        border-radius: 14px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+        padding: 32px 28px 28px 28px;
+        min-width: 300px;
+        max-width: 340px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        font-size: 1.05rem;
+    }
+    .contact-info-block {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        background: #fff8ee;
+        border-radius: 8px;
+        padding: 18px 16px 14px 16px;
+        margin-bottom: 0;
+        border: 1px solid #ffe0b2;
+    }
+    .contact-info-block:last-child {
+        margin-bottom: 0;
+    }
+    .contact-info-icon {
+        font-size: 1.5rem;
+        margin-top: 2px;
+        color: #ff9800;
+        min-width: 28px;
+    }
+    .contact-info-label {
+        color: #ff9800;
+        font-size: 0.98rem;
+        font-weight: 500;
+        margin-bottom: 2px;
+        display: block;
+    }
+    .contact-info-value {
+        color: #232323;
+        font-size: 1.08rem;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 0;
+    }
+    .contact-form-card {
+        background: rgba(255,255,255,0.98);
+        color: #232323;
+        border-radius: 14px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+        padding: 38px 32px 32px 32px;
+        min-width: 340px;
+        max-width: 500px;
+        width: 100%;
+    }
+    .contact-form-card h2 {
+        color: #ff9800;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+    .contact-form-card form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+    .contact-form-card input,
+    .contact-form-card textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 8px;
+        border: 1px solid #ffe0b2;
+        background: #fff8ee;
+        color: #232323;
+        font-size: 1rem;
+        margin-bottom: 0;
+        outline: none;
+        transition: border 0.2s, background 0.2s;
+        resize: none;
+    }
+    .contact-form-card input:focus,
+    .contact-form-card textarea:focus {
+        border: 1.5px solid #ff9800;
+        background: #fff;
+    }
+    .contact-form-card button {
+        background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px rgba(255,152,0,0.08);
+        letter-spacing: 1px;
+    }
+    .contact-form-card button:hover {
+        background: linear-gradient(90deg, #ffb74d 0%, #ff9800 100%);
+    }
+    .back-home-btn {
+        position: fixed;
+        top: 24px;
+        right: 36px;
+        z-index: 1001;
+        background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%);
+        color: #232323;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 28px;
+        font-size: 1.08rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0 2px 8px rgba(255,152,0,0.12);
+        transition: background 0.2s, color 0.2s;
+        letter-spacing: 1px;
+    }
+    .back-home-btn:hover {
+        background: linear-gradient(90deg, #ffb74d 0%, #ff9800 100%);
+        color: #fff;
+    }
+    @media (max-width: 900px) {
+        .contact-main-container {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 32px;
+            padding: 24px 4vw 40px 4vw;
+        }
+        .contact-info-card, .contact-form-card {
+            min-width: 0;
+            max-width: 100%;
+        }
+        .back-home-btn {
+            top: 12px;
+            right: 10px;
+            padding: 10px 16px;
+            font-size: 0.98rem;
+        }
+    }
+    @media (max-width: 600px) {
+        .contact-main-container {
+            padding: 12px 2vw 24px 2vw;
+        }
+        .contact-info-card, .contact-form-card {
+            padding: 18px 6vw 18px 6vw;
+        }
+        .back-home-btn {
+            top: 8px;
+            right: 4px;
+            padding: 8px 10px;
+            font-size: 0.92rem;
+        }
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<a href="{% url 'home' %}" class="back-home-btn">Back to Home</a>
+<div class="contact-hero-bg">
+    <img src="{% static 'IMG/Bumblebee camaro .jpg' %}" alt="Car Background">
+    <div class="contact-hero-overlay"></div>
+</div>
+<div class="contact-main-container">
+    <!-- Left: Contact Info -->
+    <div class="contact-info-card">
+        <div class="contact-info-block">
+            <span class="contact-info-icon">
+                <img src="{% static 'IMG/location.png' %}" alt="Address" style="width:24px;height:24px;">
+            </span>
+            <div>
+                <span class="contact-info-label">Address:</span>
+                <span class="contact-info-value">198 West 21th Street, Suite 721<br>New York NY 10016</span>
+            </div>
+        </div>
+        <div class="contact-info-block">
+            <span class="contact-info-icon">
+                <img src="{% static 'IMG/phone.png' %}" alt="Phone" style="width:24px;height:24px;">
+            </span>
+            <div>
+                <span class="contact-info-label">Phone:</span>
+                <span class="contact-info-value">+1235 2355 98</span>
+            </div>
+        </div>
+        <div class="contact-info-block">
+            <span class="contact-info-icon">
+                <img src="{% static 'IMG/email.png' %}" alt="Email" style="width:24px;height:24px;">
+            </span>
+            <div>
+                <span class="contact-info-label">Email:</span>
+                <span class="contact-info-value">info@yoursite.com</span>
+            </div>
+        </div>
+    </div>
+    <!-- Right: Feedback Form -->
+    <div class="contact-form-card">
+        <h2>Send Us Your Feedback</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="message" rows="5" placeholder="Your Feedback" required></textarea>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

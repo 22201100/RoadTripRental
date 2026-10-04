@@ -1,0 +1,32 @@
+{% load static %}
+<style>
+  .btn-pink {
+    background-color: #fff;
+    color: #e91e63;
+    border: 2px solid #e91e63;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-pink:hover, .btn-pink:focus {
+    background-color: #e91e63;
+    color: #fff;
+  }
+</style>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #eee;">
+  <div class="container-fluid">
+    <!-- Logo and Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+      <img src="{% static 'IMG/logo.png' %}" alt="Logo" style="height:100px; width:100px; margin-right:6px; display:inline-block; object-fit:contain;">
+      <span style="color:#E91E63; font-weight:bold; font-size:1.5rem;">RoadTripRentals</span>
+    </a>
+    <!-- Navigation Buttons -->
+    <div class="d-flex ms-auto">
+      <a href="{% url 'home' %}" class="btn btn-pink rounded-pill mx-1 fw-bold">Home</a>
+      <a href="#" class="btn btn-pink rounded-pill mx-1 fw-bold">Help</a>
+      <a href="#" class="btn btn-pink rounded-pill mx-1 fw-bold">Contact</a>
+      <a href="{% url 'about' %}" class="btn btn-pink rounded-pill mx-1 fw-bold">About</a>
+      <a href="{% url 'login' %}" class="btn btn-pink rounded-pill mx-1 fw-bold">Log In</a>
+      <a href="{% url 'signup' %}" class="btn btn-pink rounded-pill mx-1 fw-bold">Sign Up</a>
+    </div>
+  </div>
+</nav>
+ 
